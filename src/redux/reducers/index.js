@@ -23,8 +23,9 @@ export const initialState = () =>  {
 
 const reducer = (state = initialState(), action) => {
     switch (action.type) {
-        case TYPES.SCORE_PINS:
-            return {};
+        case TYPES.SCORE_ROLL:
+            console.log('score_roll:', action)
+            return state;
         case TYPES.RESET_GAME:
             return initialState();
         default:
