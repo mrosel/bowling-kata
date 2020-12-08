@@ -1,16 +1,32 @@
 import * as TYPES from '../actions/types';
 
-export const initialState = {
+export const initialState = () =>  {
+    const state = {
+        frames: new Array(10).fill().map((value, index) => ({
+            frameNum: index + 1,
+            rolls: [],
+            // rollScore: null,
+            bonusType: null,
+            score: null,
+            scoreIsFinalized: false,
+            isCurrent: index === 0,
 
+        })),
+        totalScore: null,
+    };
 
+    console.log('state:', state)
+    return state;
 };
 
-const reducer = (state = initialState, action) => {
+
+
+const reducer = (state = initialState(), action) => {
     switch (action.type) {
         case TYPES.SCORE_PINS:
             return {};
         case TYPES.RESET_GAME:
-            return {};
+            return initialState();
         default:
             return state;
     }

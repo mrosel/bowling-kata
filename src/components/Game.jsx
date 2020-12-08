@@ -1,16 +1,16 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import Reducers, { initialState } from '../redux/reducers';
+import reducer, { initialState } from '../redux/reducers';
 import ScoringButtons from './ScoringButtons';
 import ScoreCard from './ScoreCard';
 
 const Game = props => {
-    const [state, dispatch] = useReducer(initialState);
+    const [state, dispatch] = useReducer(reducer, initialState());
 
     return (
         <div>
-            <ScoringButtons />
+            <ScoringButtons state={state} dispatch={dispatch} />
             <ScoreCard />
         </div>
     );
