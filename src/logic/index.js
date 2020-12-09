@@ -42,23 +42,53 @@ export const recordRollScore = (rollScore, frames) => {
 }
 
 export const getMaxRolls = (is10thFrame, bonusTypeIsSet) => {
-    if (!is10thFrame && bonusTypeIsSet) return 1; // max is 1 for strike and 2 for spare, but using 1 handles both bonusTypes below when determing current frame
+    if (!is10thFrame && bonusTypeIsSet) return 1; // max is 1 for strike and 2 for spare, but using "1" handles both bonusTypes below when determing current frame
     if (is10thFrame && bonusTypeIsSet) return 3;
     return 2;
 };
+
+export const calculateFrameScores = frames => {
+    return frames.map(frame => {
+        const { rolls, bonusType, frameScore } = frame;
+
+        // if frame score has been calculated already OR frame score can NOT be calculated yet, skip it
+        if (frameScore !== null || !rolls.length) {
+            return frame;
+        }
+
+        // if there is no bonusType set and max rolls have been made (10th frame is irrelevant if there is no bonusType)
+        if (!bonusType && rolls.length === getMaxRolls(false, false)) {
+            return {
+                ...frame,
+                bonusScore: 0,
+                frameScore: rollsScore(rolls)
+            };
+        }
+
+        return frame;
+    });
+
+    // frameNum: index + 1,
+    // rolls: [],
+    // bonusType: null,
+
+    // bonusScore: null,
+    // frameScore: null,
+}
+
 
 export const setCurrentFrame = frames => {
     const { frameNum, rolls, bonusType } = getCurrentFrame(frames);
     const newCurrentFrameNum = frameNum + 1;
     const maxRolls = getMaxRolls.bind(null, frameNum === TOTAL_FRAMES, !!bonusType);
 
-    console.log('frameNum:', frameNum, "-", maxRolls(), "-", rolls, Date.now());
+    // console.log('frameNum:', frameNum, "-", maxRolls(), "-", rolls, Date.now());
 
     // if rolls have NOT exceeded the max for this frame, this is still current frame
     if (rolls.length < maxRolls()) {
         return frames;
     }
-    console.log('updating current frame to:', newCurrentFrameNum, Date.now());
+    // console.log('updating current frame to:', newCurrentFrameNum, Date.now());
 
     return frames.map(frame => {
         if (frame.frameNum !== frameNum && frame.frameNum !== newCurrentFrameNum) {
@@ -70,23 +100,3 @@ export const setCurrentFrame = frames => {
         }
     });
 };
-
-export const calculateFrameScores = frames => {
-    return frames.map(frame => {
-        if (frame.accruedFrameScore === null) {
-
-        }
-
-        return frame;
-    });
-    // frameNum: index + 1,
-    // rolls: [],
-    // bonusType: null,
-
-    // bonusRolls: [],
-    // frameScore: null,
-
-    // accruedFrameScore: null,
-    // isCurrent: index === 0,
-}
-
