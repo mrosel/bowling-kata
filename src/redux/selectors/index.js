@@ -6,5 +6,5 @@ export const scoreButtonsSelector = state => {
     const currentFrame = getCurrentFrame(state.frames);
     if (!currentFrame) return null;
 
-    return availableScoreButtons(currentFrame.rolls);
+    return availableScoreButtons(currentFrame);
 };

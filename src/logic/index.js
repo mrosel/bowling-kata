@@ -2,8 +2,27 @@ import { BONUS_TYPE, MAX_ROLL_SCORE, TOTAL_FRAMES } from '../constants';
 
 export const getCurrentFrame = frames => frames.find(frame => frame.isCurrent);
 
-export const availableScoreButtons = rolls => {
-    const scoreButtons = MAX_ROLL_SCORE - rollsScore(rolls);
+export const availableScoreButtons = ({ frameNum, rolls, bonusType }) => {
+    let scoreButtons;
+
+    // if NOT 10th frame OR (implicity it is 10th frame AND) bonusType is NOT set for 10th frame, available score buttons are based on total of rolls
+    if (frameNum < TOTAL_FRAMES || !bonusType) {
+        scoreButtons = MAX_ROLL_SCORE - rollsScore(rolls);
+    } else { // else there is a bonusType for 10th frame
+        const secondRollMade = rolls.length >= 2;
+        const [, secondRoll] = rolls;
+
+        // if there is strike in 10th frame AND 2nd roll has been made AND 2nd roll is NOT a strike
+        // else 10th frame is spare
+        //   -OR- 10th frame is strike and 2nd roll has NOT been made yet
+        //   -OR- 10th frame is strike and 2nd roll has been made and it is strike
+        if (bonusType === BONUS_TYPE.STRIKE && secondRollMade && secondRoll !== MAX_ROLL_SCORE) {
+            scoreButtons = MAX_ROLL_SCORE - secondRoll;
+        } else {
+            scoreButtons = MAX_ROLL_SCORE;
+        }
+    }
+
     return scoreButtons && scoreButtons + 1; // include button to score 0 pins rolled if other score buttons are available
 }
 
@@ -29,14 +48,6 @@ export const getMaxRolls = (is10thFrame, bonusTypeIsSet) => {
 };
 
 export const setCurrentFrame = frames => {
-    // const currentFrame = getCurrentFrame(frames);
-    // const is10thFrame = currentFrame.frameNum === TOTAL_FRAMES;
-    // const maxRolls = is10thFrame && currentFrame.bonusType ? 3 : 2; // max rolls per frame is 2 unless its 10th frame and a strike or spare is scored
-
-    // const { frameNum, rolls, bonusType } = getCurrentFrame(frames);
-    // const is10thFrame = frameNum === TOTAL_FRAMES;
-    // const maxRolls = is10thFrame && bonusType ? 3 : 2; // max rolls per frame is 2 unless its 10th frame and a strike or spare is scored
-
     const { frameNum, rolls, bonusType } = getCurrentFrame(frames);
     const newCurrentFrameNum = frameNum + 1;
     const maxRolls = getMaxRolls.bind(null, frameNum === TOTAL_FRAMES, !!bonusType);
