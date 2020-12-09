@@ -4,7 +4,6 @@ import * as TYPES from '../actions/types';
 import { currentFrameSelector } from '../selectors';
 import { calculateFrameScores, recordRollScore } from '../../logic';
 
-
 export const initialState = () =>  {
     const state = {
         frames: new Array(TOTAL_FRAMES).fill().map((value, index) => ({
