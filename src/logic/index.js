@@ -42,38 +42,53 @@ export const recordRollScore = (rollScore, frames) => {
 }
 
 export const getMaxRolls = (is10thFrame, bonusTypeIsSet) => {
-    if (!is10thFrame && bonusTypeIsSet) return 1; // max is 1 for strike and 2 for spare, but using "1" handles both bonusTypes below when determing current frame
+    if (!is10thFrame && bonusTypeIsSet) return 1; // max is 1 for strike and 2 for spare, but using "1" handles both bonusTypes below when determining which frame is current
     if (is10thFrame && bonusTypeIsSet) return 3;
     return 2;
 };
 
 export const calculateFrameScores = frames => {
-    return frames.map(frame => {
-        const { rolls, bonusType, frameScore } = frame;
+    return frames.map((frame, frameIndex) => {
+        const { frameNum, rolls, bonusType, frameScore } = frame;
 
         // if frame score has been calculated already OR frame score can NOT be calculated yet, skip it
         if (frameScore !== null || !rolls.length) {
             return frame;
         }
 
-        // if there is no bonusType set and max rolls have been made (10th frame is irrelevant if there is no bonusType)
+        // if bonusType is NOT set AND max rolls have been made (10th frame is not a special case if there is no bonusType)
         if (!bonusType && rolls.length === getMaxRolls(false, false)) {
             return {
                 ...frame,
-                bonusScore: 0,
                 frameScore: rollsScore(rolls)
             };
         }
 
+        if (bonusType) {
+            const is10thFrame = frameNum === TOTAL_FRAMES;
+            let bonusRolls;
+
+            // if 10th frame, get bonus roll(s) from this frame rolls (if strike, take last 2 rolls, else take only last roll)
+            // else get bonus roll(s) from next 2 frames (if strike, take first 2 rolls, else take only first roll)
+            if (is10thFrame) {
+                bonusRolls = rolls.slice(bonusType === BONUS_TYPE.STRIKE ? 1 : 2);
+            } else {
+                bonusRolls = frames.slice(frameIndex + 1, frameIndex + 3).reduce((bonusRolls, frame) => {
+                    return [...bonusRolls, ...frame.rolls];
+                }, []);
+                bonusRolls = bonusRolls.slice(0, bonusType === BONUS_TYPE.STRIKE ? 2 : 1);
+            }
+
+            if (bonusRolls.length === bonusType) { // if enough bonus rolls have been made
+                return {
+                    ...frame,
+                    frameScore: rollsScore(is10thFrame ? [...rolls] : [...rolls, ...bonusRolls]) // in 10th frame, just add all 3 roles
+                };
+            }
+        }
+
         return frame;
     });
-
-    // frameNum: index + 1,
-    // rolls: [],
-    // bonusType: null,
-
-    // bonusScore: null,
-    // frameScore: null,
 }
 
 

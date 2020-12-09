@@ -9,8 +9,7 @@ export const initialState = () =>  {
             frameNum: index + 1,
             rolls: [],
             bonusType: null,
-            // bonusRolls: [],
-            bonusScore: null,
+            // bonusScore: null,
             frameScore: null,
             accruedFrameScore: null,
             isCurrent: index === 0,
@@ -27,6 +26,7 @@ const scoreRoll = (state, rollScore) => {
     frames = calculateFrameScores(frames);
     frames = setCurrentFrame(frames);
 
+    console.table(frames);
 
     // push rollScore to frame.rolls
     // if score is 10, set bonusType
