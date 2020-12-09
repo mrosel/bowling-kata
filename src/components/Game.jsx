@@ -5,8 +5,10 @@ import reducer, { initialState } from '../redux/reducers';
 import ScoringButtons from './ScoringButtons';
 import ScoreCard from './ScoreCard';
 
+const initState = initialState();
+
 const Game = props => {
-    const [state, dispatch] = useReducer(reducer, initialState());
+    const [state, dispatch] = useReducer(reducer, initState);
 
     return (
         <div>
