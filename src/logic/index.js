@@ -91,19 +91,31 @@ export const calculateFrameScores = frames => {
     });
 }
 
+export const calculateAccruedFrameScores = frames => {
+    return frames.map((frame, frameIndex) => {
+        const { accruedFrameScore, frameScore } = frame;
+
+        // if accrued frame score frame score has been calculated already OR frame score has NOT been calculated yet, skip it
+        if (accruedFrameScore !== null || frameScore === null) {
+            return frame;
+        }
+
+        return {
+            ...frame,
+            accruedFrameScore: frameScore + (frames[frameIndex - 1]?.accruedFrameScore ?? 0)
+        };
+    });
+}
 
 export const setCurrentFrame = frames => {
     const { frameNum, rolls, bonusType } = getCurrentFrame(frames);
     const newCurrentFrameNum = frameNum + 1;
     const maxRolls = getMaxRolls.bind(null, frameNum === TOTAL_FRAMES, !!bonusType);
 
-    // console.log('frameNum:', frameNum, "-", maxRolls(), "-", rolls, Date.now());
-
     // if rolls have NOT exceeded the max for this frame, this is still current frame
     if (rolls.length < maxRolls()) {
         return frames;
     }
-    // console.log('updating current frame to:', newCurrentFrameNum, Date.now());
 
     return frames.map(frame => {
         if (frame.frameNum !== frameNum && frame.frameNum !== newCurrentFrameNum) {
