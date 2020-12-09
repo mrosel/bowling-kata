@@ -2,9 +2,9 @@ import { BONUS_TYPE, MAX_ROLL_SCORE } from '../constants';
 
 export const getCurrentFrame = frames => frames.find(frame => frame.isCurrent);
 
-export const availableScoreRollButtons = rolls => {
-    const scoreRollButtons = MAX_ROLL_SCORE - rollsScore(rolls);
-    return scoreRollButtons && scoreRollButtons + 1; // include button to score 0 pins rolled if other score buttons are available
+export const availableScoreButtons = rolls => {
+    const scoreButtons = MAX_ROLL_SCORE - rollsScore(rolls);
+    return scoreButtons && scoreButtons + 1; // include button to score 0 pins rolled if other score buttons are available
 }
 
 export const rollsScore = rolls => rolls.reduce((score, roll) => score + roll, 0);

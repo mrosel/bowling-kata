@@ -9,8 +9,6 @@ const ScoreCard = props => {
     );
 };
 
-ScoreCard.propTypes = {
-
-};
+ScoreCard.propTypes = {};
 
 export default ScoreCard;

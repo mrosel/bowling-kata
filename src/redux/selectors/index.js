@@ -1,10 +1,10 @@
-import { getCurrentFrame, availableScoreRollButtons } from '../../logic';
+import { getCurrentFrame, availableScoreButtons } from '../../logic';
 
 export const currentFrameSelector = state => getCurrentFrame(state.frames);
 
-export const scoreRollButtonsSelector = state => {
+export const scoreButtonsSelector = state => {
     const currentFrame = getCurrentFrame(state.frames);
     if (!currentFrame) return null;
 
-    return availableScoreRollButtons(currentFrame.rolls);
+    return availableScoreButtons(currentFrame.rolls);
 };
