@@ -1,8 +1,8 @@
 import * as TYPES from './types';
 
-export const scoreRoll = score => ({
+export const scoreRoll = rollScore => ({
     type: TYPES.SCORE_ROLL,
-    score
+    rollScore
 });
 
 export const resetGame = () => ({
