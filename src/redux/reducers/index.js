@@ -16,7 +16,6 @@ export const initialState = () =>  {
             isCurrent: index === 0,
 
         })),
-        rolls: [],
         totalScore: null,
     };
 
@@ -26,18 +25,24 @@ export const initialState = () =>  {
 
 const scoreRoll = (state, rollScore) => {
     const currentFrame = currentFrameSelector(state);
-    const roll = {rollScore};
+    // const roll = {rollScore};
 
-    const updatedFrame = Object.assign({}, currentFrame, {
-        rolls: [...currentFrame.rolls]
-    });
+    let frames = recordRollScore(currentFrame, rollScore, state.frames);
+
 
     // push rollScore to frame.rolls
     // if score is 10, set bonusType
+    // push updated frame back into frames???
     //
+    // iterate all frames where score is NOT finalized and have at least 1 roll
+    //
+    // set next current frame
 
-    console.log('updatedFrame:', updatedFrame)
-    return state;
+    // console.log('updatedFrame:', updatedFrame)
+    return {
+        ...state,
+        frames
+    };
 };
 
 const reducer = (state = initialState(), action) => {

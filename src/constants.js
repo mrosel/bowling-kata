@@ -1,6 +1,6 @@
 export const BONUS_TYPE = {
-    strike: 2,
-    spare: 1,
+    STRIKE: 2,
+    SPARE: 1,
 }
 
 export const TOTAL_FRAMES = 10;
