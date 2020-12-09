@@ -18,3 +18,16 @@ export const recordRollScore = (currentFrame, rollScore, frames) => {
     return frames.map(frame => frame.frameNum === updatedFrame.frameNum ? updatedFrame : frame);
 }
 
+export const calculateFrameScores = frames => {
+    return frames.map(frame => {
+        return frame;
+    });
+    // frameNum: index + 1,
+    // rolls: [],
+    // bonusType: null,
+    // bonusRolls: [],
+    // frameScore: null,
+    // accruedFrameScore: null,
+    // isCurrent: index === 0,
+}
+
