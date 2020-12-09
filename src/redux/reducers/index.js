@@ -1,8 +1,7 @@
 
 import { TOTAL_FRAMES } from '../../constants';
 import * as TYPES from '../actions/types';
-import { currentFrameSelector } from '../selectors';
-import { calculateFrameScores, recordRollScore } from '../../logic';
+import { calculateFrameScores, recordRollScore, setCurrentFrame } from '../../logic';
 
 export const initialState = () =>  {
     const state = {
@@ -23,11 +22,9 @@ export const initialState = () =>  {
 };
 
 const scoreRoll = (state, rollScore) => {
-    const currentFrame = currentFrameSelector(state);
-    // const roll = {rollScore};
-
-    let frames = recordRollScore(currentFrame, rollScore, state.frames);
+    let frames = recordRollScore(rollScore, state.frames);
     frames = calculateFrameScores(frames);
+    frames = setCurrentFrame(frames);
 
 
     // push rollScore to frame.rolls
