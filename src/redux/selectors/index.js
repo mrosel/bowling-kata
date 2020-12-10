@@ -8,3 +8,5 @@ export const scoreButtonsSelector = state => {
 
     return availableScoreButtons(currentFrame);
 };
+
+export const totalScoreSelector = state => state.totalScore;

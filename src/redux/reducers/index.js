@@ -4,6 +4,7 @@ import * as TYPES from '../actions/types';
 import {
     calculateAccruedFrameScores,
     calculateFrameScores,
+    deriveTotalScore,
     recordRollScore,
     setCurrentFrame
 } from '../../logic';
@@ -33,18 +34,10 @@ const scoreRoll = (state, rollScore) => {
 
     console.table(frames);
 
-    // push rollScore to frame.rolls
-    // if score is 10, set bonusType
-    // push updated frame back into frames???
-    //
-    // iterate all frames where score is NOT finalized and have at least 1 roll
-    //
-    // set next current frame
-
-    // console.log('updatedFrame:', updatedFrame)
     return {
         ...state,
-        frames
+        frames,
+        totalScore: deriveTotalScore(frames)
     };
 };
 

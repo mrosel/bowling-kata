@@ -13,7 +13,7 @@ const Game = () => {
     return (
         <Fragment>
             <ScoreButtons state={state} dispatch={dispatch} />
-            <ScoreCard />
+            <ScoreCard state={state} />
         </Fragment>
     );
 };

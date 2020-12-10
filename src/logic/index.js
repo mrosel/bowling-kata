@@ -127,3 +127,9 @@ export const setCurrentFrame = frames => {
         }
     });
 };
+
+export const deriveTotalScore = frames => {
+    return frames.reduce((totalScore, { accruedFrameScore }) => {
+        return accruedFrameScore ?? totalScore;
+    }, null);
+};

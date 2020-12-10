@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ScoreCard = props => {
+import { totalScoreSelector } from '../redux/selectors';
+
+const ScoreCard = ({ state }) => {
+    const totalScore = totalScoreSelector(state);
+
     return (
         <div>
-            ScoreCard...
+            ScoreCard... TOTAL: {totalScore}
         </div>
     );
 };
