@@ -92,19 +92,23 @@ export const calculateFrameScores = frames => {
 }
 
 export const calculateAccruedFrameScores = frames => {
-    return frames.map((frame, frameIndex) => {
+    return frames.reduce((updatedFrames, frame, frameIndex) => {
         const { accruedFrameScore, frameScore } = frame;
+        let updatedFrame;
 
         // if accrued frame score frame score has been calculated already OR frame score has NOT been calculated yet, skip it
         if (accruedFrameScore !== null || frameScore === null) {
-            return frame;
+            updatedFrame = frame;
+        } else {
+            updatedFrame = {
+                ...frame,
+                accruedFrameScore: frameScore + (updatedFrames[frameIndex - 1]?.accruedFrameScore ?? 0)
+            };
         }
 
-        return {
-            ...frame,
-            accruedFrameScore: frameScore + (frames[frameIndex - 1]?.accruedFrameScore ?? 0)
-        };
-    });
+        updatedFrames.push(updatedFrame);
+        return updatedFrames;
+    }, [])
 }
 
 export const setCurrentFrame = frames => {
