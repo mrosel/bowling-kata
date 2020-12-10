@@ -2,8 +2,9 @@ import React, { Fragment, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import reducer, { initialState } from '../redux/reducers';
-import ScoreButtons from './ScoreButtons';
 import ScoreCard from './ScoreCard';
+import ScoreButtons from './ScoreButtons';
+import ResetButton from './ResetButton';
 
 const initState = initialState();
 
@@ -11,10 +12,11 @@ const Game = () => {
     const [state, dispatch] = useReducer(reducer, initState);
 
     return (
-        <Fragment>
-            <ScoreButtons state={state} dispatch={dispatch} />
+        <div className="game">
             <ScoreCard state={state} />
-        </Fragment>
+            <ResetButton state={state} dispatch={dispatch} />
+            <ScoreButtons state={state} dispatch={dispatch} />
+        </div>
     );
 };
 

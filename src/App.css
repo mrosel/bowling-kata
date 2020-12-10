@@ -2,44 +2,45 @@
   text-align: center;
 }
 
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .score-card {
   display: flex;
+  margin-top: 20px;
 }
 
 .score-card .frame {
   border: 1px solid black;
-  min-width: 80px;
-  min-height: 80px;
+  min-width: 60px;
+  min-height: 60px;
 }
 .score-card .frame + .frame {
   border-left-style: none;
 }
 
 .score-card .frame .heading {
+  background-color: #eeeeee;
   border-bottom: 1px solid black;
   padding: 2px;
 }
 
 .score-card .frame .rolls {
   display: flex;
-  /* padding: 2px; */
 }
 
 .score-card .frame .roll {
   flex-grow: 1;
   flex-basis: 0;
-  /* border: 1px solid black; */
   padding: 4px;
-  /* box-sizing: border-box; */
-  /* border: 1px solid black; */
-  /* margin: 0; */
 }
 
 .score-card .frame .roll + .roll {
-  /* flex-grow: 1; */
   border-left: 1px solid black;
   border-bottom: 1px solid black;
-  /* padding: 2px; */
 }
 
 .score-card .frame .score {
@@ -47,8 +48,15 @@
 }
 
 .score-buttons {
-  padding: 10px;
+  margin-top: 20px;
 }
-.score-button + .score-button {
-  margin-left: 4px;
+.score-buttons button {
+  padding: 4px 10px;
+}
+.score-buttons button + button {
+  margin-left: 8px;
+}
+
+.reset-button {
+  margin-top: 20px;
 }

@@ -25,7 +25,10 @@ const ScoreCard = ({ state }) => {
                     </div>
                 )
             })}
-            <div>TOTAL: {totalScore}</div>
+            <div className="frame">
+                <div className="heading">TOTAL</div>
+                <div className="total-score">{totalScore}</div>
+            </div>
         </div>
     );
 };
