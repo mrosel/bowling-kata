@@ -8,11 +8,42 @@
 
 .score-card .frame {
   border: 1px solid black;
-  min-width: 100px;
-  min-height: 100px;
+  min-width: 80px;
+  min-height: 80px;
 }
 .score-card .frame + .frame {
   border-left-style: none;
+}
+
+.score-card .frame .heading {
+  border-bottom: 1px solid black;
+  padding: 2px;
+}
+
+.score-card .frame .rolls {
+  display: flex;
+  /* padding: 2px; */
+}
+
+.score-card .frame .roll {
+  flex-grow: 1;
+  flex-basis: 0;
+  /* border: 1px solid black; */
+  padding: 4px;
+  /* box-sizing: border-box; */
+  /* border: 1px solid black; */
+  /* margin: 0; */
+}
+
+.score-card .frame .roll + .roll {
+  /* flex-grow: 1; */
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  /* padding: 2px; */
+}
+
+.score-card .frame .score {
+  padding: 8px;
 }
 
 .score-buttons {

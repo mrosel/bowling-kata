@@ -11,7 +11,7 @@ import {
 
 export const initialState = () =>  {
     const state = {
-        frames: new Array(TOTAL_FRAMES).fill().map((value, index) => ({
+        frames: Array(TOTAL_FRAMES).fill().map((value, index) => ({
             frameNum: index + 1,
             rolls: [],
             bonusType: null,

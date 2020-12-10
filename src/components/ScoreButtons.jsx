@@ -10,7 +10,7 @@ const ScoringButtons = ({ state, dispatch }) => {
 
     return (
         <div className="score-buttons">
-            {new Array(scoreButtons).fill().map((value, rollScore) =>
+            {Array(scoreButtons).fill().map((value, rollScore) =>
                 <button className="score-button" key={rollScore} onClick={() => { dispatch(scoreRoll(rollScore)) }}>{rollScore}</button>
             )}
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { TOTAL_FRAMES } from '../constants';
 import { framesSelector, totalScoreSelector } from '../redux/selectors';
 
 const ScoreCard = ({ state }) => {
@@ -9,14 +10,18 @@ const ScoreCard = ({ state }) => {
 
     return (
         <div className="score-card">
-            {frames.map(({ frameNum, rolls, frameScore, isCurrent }) => {
+            {frames.map(({ frameNum, rolls, accruedFrameScore, isCurrent }) => {
                 return (
-                    <div className={`frame ${isCurrent ? 'is-current' : ''}`}>
+                    <div key={`f${frameNum}`} className={`frame ${isCurrent ? 'is-current' : ''}`}>
                         <div className="heading">{frameNum}</div>
                         <div className="rolls">
-
+                            {Array(frameNum === TOTAL_FRAMES ? 3 : 2).fill().map((value, rollIndex) => {
+                                return (
+                                    <div key={`f${frameNum}r${rollIndex}`} className="roll">{rolls[rollIndex] ?? ' '}</div>
+                                );
+                            })}
                         </div>
-
+                        <div className="score">{accruedFrameScore}</div>
                     </div>
                 )
             })}
