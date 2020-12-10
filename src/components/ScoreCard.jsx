@@ -3,7 +3,7 @@ import React from 'react';
 import { TOTAL_FRAMES } from '../constants';
 import { framesSelector, totalScoreSelector } from '../redux/selectors';
 
-const Nbsp = () => '\u00A0';
+const Nbsp = () => '\u00A0'; // css hack-ery 8-O
 
 const ScoreCard = ({ state }) => {
     const frames = framesSelector(state);

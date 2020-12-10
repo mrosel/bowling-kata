@@ -32,7 +32,6 @@ const scoreRoll = (state, rollScore) => {
     frames = calculateAccruedFrameScores(frames);
     frames = setCurrentFrame(frames);
 
-    // console.table(frames);
     return {
         ...state,
         frames,
@@ -43,7 +42,6 @@ const scoreRoll = (state, rollScore) => {
 const reducer = (state = initialState(), action) => {
     switch (action.type) {
         case TYPES.SCORE_ROLL:
-            console.log('score_roll:', action)
             return scoreRoll(state, action.rollScore);
         case TYPES.RESET_GAME:
             return initialState();

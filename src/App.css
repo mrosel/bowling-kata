@@ -17,7 +17,14 @@
   min-width: 80px;
 }
 .score-card .frame + .frame {
-  border-left-style: none;
+  /* border-left-style: none; */
+  margin-left: -1px;
+}
+.score-card .frame.is-current {
+  border-left: 1px solid;
+  border-color: #ff0000;
+  background-color: #fdf6f6;
+  z-index: 999;
 }
 
 .score-card .frame .heading {
