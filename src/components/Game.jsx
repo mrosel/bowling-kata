@@ -1,5 +1,4 @@
-import React, { Fragment, useReducer } from 'react';
-import PropTypes from 'prop-types';
+import React, { useReducer } from 'react';
 
 import reducer, { initialState } from '../redux/reducers';
 import ScoreCard from './ScoreCard';
@@ -19,7 +18,5 @@ const Game = () => {
         </div>
     );
 };
-
-Game.propTypes = {};
 
 export default Game;

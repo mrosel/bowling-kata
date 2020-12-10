@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { currentFrameSelector } from '../redux/selectors';
 import { resetGame } from '../redux/actions';
-
 
 const ResetButton = ({ state, dispatch }) => {
     const currentFrame = currentFrameSelector(state);
@@ -14,7 +12,5 @@ const ResetButton = ({ state, dispatch }) => {
         </div>
     );
 };
-
-ResetButton.propTypes = {};
 
 export default ResetButton;

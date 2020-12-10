@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { scoreButtonsSelector } from '../redux/selectors';
 import { scoreRoll } from '../redux/actions';
@@ -16,7 +15,5 @@ const ScoringButtons = ({ state, dispatch }) => {
         </div>
     );
 };
-
-ScoringButtons.propTypes = {};
 
 export default ScoringButtons;

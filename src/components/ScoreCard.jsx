@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { TOTAL_FRAMES } from '../constants';
 import { framesSelector, totalScoreSelector } from '../redux/selectors';
+
+const Nbsp = () => '\u00A0';
 
 const ScoreCard = ({ state }) => {
     const frames = framesSelector(state);
@@ -17,22 +18,20 @@ const ScoreCard = ({ state }) => {
                         <div className="rolls">
                             {Array(frameNum === TOTAL_FRAMES ? 3 : 2).fill().map((value, rollIndex) => {
                                 return (
-                                    <div key={`f${frameNum}r${rollIndex}`} className="roll">{rolls[rollIndex] ?? ' '}</div>
+                                    <div key={`f${frameNum}r${rollIndex}`} className="roll">{rolls[rollIndex] ?? <Nbsp />}</div>
                                 );
                             })}
                         </div>
-                        <div className="score">{accruedFrameScore}</div>
+                        <div className="score">{accruedFrameScore ?? <Nbsp />}</div>
                     </div>
                 )
             })}
             <div className="frame">
-                <div className="heading">TOTAL</div>
+                <div className="heading total">TOTAL</div>
                 <div className="total-score">{totalScore}</div>
             </div>
         </div>
     );
 };
-
-ScoreCard.propTypes = {};
 
 export default ScoreCard;
