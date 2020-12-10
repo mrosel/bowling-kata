@@ -32,8 +32,7 @@ const scoreRoll = (state, rollScore) => {
     frames = calculateAccruedFrameScores(frames);
     frames = setCurrentFrame(frames);
 
-    console.table(frames);
-
+    // console.table(frames);
     return {
         ...state,
         frames,

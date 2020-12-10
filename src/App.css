@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+.score-card {
+  display: flex;
+}
+
+.score-card .frame {
+  border: 1px solid black;
+  min-width: 100px;
+  min-height: 100px;
+}
+.score-card .frame + .frame {
+  border-left-style: none;
+}
+
 .score-buttons {
   padding: 10px;
 }
